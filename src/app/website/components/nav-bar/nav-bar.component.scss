@@ -1,0 +1,50 @@
+@import "functions";
+@import "variables";
+@import "mixins";
+
+.name-store {
+  padding-right: 8rem;
+}
+
+mat-toolbar-row {
+  @include flex(row, flex-start);
+  padding: 0.2rem 5rem;
+}
+
+.background-search-bar {
+  background-color: white;
+  width: 50%;
+  border: 2px solid rgb(55, 55, 55);
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.42);
+
+  input {
+    padding: 0.5rem;
+    font-size: large;
+    width: 90%;
+    background: transparent;
+    border: none;
+    outline: 0;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.search-button {
+  color: rgba(0, 0, 0, 0.42);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.list-horizontal {
+  padding: 0;
+  mat-list-item {
+    display: inline-block;
+    width: auto;
+  }
+}

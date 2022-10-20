@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { MaterialModule } from './material/material.module';
     AuthModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],

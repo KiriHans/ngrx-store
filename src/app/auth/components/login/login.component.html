@@ -1,0 +1,29 @@
+<div class="content">
+  <mat-card class="login-card">
+    <figure class="image-login">
+      <img matCardImage src="assets/MB63189-scaled.jpg" />
+    </figure>
+
+    <mat-card-content>
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+        <mat-card-title> Sign in</mat-card-title>
+        <p>Don't have an account? <a routerLink="../register">Sign up now</a></p>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matNativeControl formControlName="email" />
+          <mat-error>Email is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matNativeControl type="password" formControlName="password" />
+          <mat-error>Password is required</mat-error>
+        </mat-form-field>
+
+        <button [disabled]="loginForm.invalid || isLogin" mat-raised-button color="accent">Sign in</button>
+        <mat-card-footer> You don't have an account? <a routerLink="../register">Sign up now</a></mat-card-footer>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
