@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
+import { noop, tap } from 'rxjs';
 import { login } from '../../auth.actions';
 import { Login, LoginDto, LoginForm } from '../../models/login.models';
 import { AuthState } from '../../reducers';
@@ -23,26 +23,29 @@ export class LoginComponent implements OnInit {
 
   buildForm() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
   login(formData: LoginForm) {
-    const credentials: LoginDto = {
+    const credentials: { data: LoginDto } = {
       data: {
         user: formData.email,
         email: formData.email,
         password: formData.password,
       },
     };
-    this.auth.login(credentials).pipe(
-      tap({
-        next: (user) => {
-          this.store.dispatch(login(user));
-          this.router.navigateByUrl('/');
-        },
-      })
-    );
+    this.auth
+      .login(credentials)
+      .pipe(
+        tap({
+          next: (user) => {
+            this.store.dispatch(login(user));
+            this.router.navigateByUrl('/');
+          },
+        })
+      )
+      .subscribe(noop);
   }
 }

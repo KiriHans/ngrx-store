@@ -16,8 +16,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(credentials: LoginDto): Observable<Login> {
-    return this.http.post<Login>(`${this.AUTHURL}/users/login`, credentials).pipe(
+  login(credentials: { data: LoginDto }): Observable<{ data: Login }> {
+    return this.http.post<{ data: Login }>(`${this.AUTHURL}/users/login`, credentials).pipe(
       tap({
         next: () => {
           this.isLoggedIn = true;
@@ -55,6 +55,6 @@ export class AuthService {
   }
 
   saveTokens(response: Login) {
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('token', response.token);
   }
 }

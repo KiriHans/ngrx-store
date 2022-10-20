@@ -1,0 +1,75 @@
+@import "functions";
+@import "mixins";
+@import "variables";
+
+.content {
+  @include flex(column, center);
+  background-image: linear-gradient(to top, #efedee 10%, #f7f3f4);
+  height: 100%;
+}
+
+.login-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin: 1rem auto;
+  column-gap: 40px;
+  width: 60vw;
+
+  border-radius: $border-radius;
+  box-shadow: 1rem 1rem 2rem 3px rgba($color: #414141, $alpha: 0.35);
+
+  @include mobile {
+    width: 70vw;
+  }
+}
+
+.mat-card > :first-child {
+  margin-top: -16px;
+}
+
+.image-login {
+  --min-height: 400px;
+  margin: -16px 0 -16px -16px;
+  overflow: hidden;
+  height: 30vw;
+  min-height: var(--min-height);
+  border-bottom-left-radius: $border-radius;
+  border-top-left-radius: $border-radius;
+
+  @include mobile {
+    display: none;
+  }
+
+  img {
+    margin: 0;
+    margin-left: -9rem;
+
+    border-radius: $border-radius;
+    height: inherit;
+    min-height: var(--min-height);
+    overflow: hidden;
+    width: auto;
+  }
+}
+
+mat-card-content {
+  @include flex(column, space-around);
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+.login-form {
+  @include flex(column, center);
+  gap: 1rem;
+  padding-right: 24px;
+
+  text-align: center;
+
+  @include mobile {
+    padding-right: 0;
+    padding-bottom: 0.5rem;
+    padding-top: 1rem;
+  }
+}

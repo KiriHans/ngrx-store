@@ -1,4 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, tap } from 'rxjs';
+import { Category } from '../../models/category.models';
+import { CategoriesService } from '../../services/categories.service';
+import { category } from '../../website.actions';
 
 @Component({
   selector: 'website-nav-bar',
@@ -7,7 +12,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavBarComponent implements OnInit {
-  constructor() {}
+  categoryList$!: Observable<Category[]>;
+  constructor(private categoresService: CategoriesService, private store: Store<Category[]>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categoryList$ = this.categoresService.getCategories().pipe(
+      tap({
+        next: (categories) => {
+          this.store.dispatch(category({ categoryList: categories }));
+        },
+      })
+    );
+  }
 }

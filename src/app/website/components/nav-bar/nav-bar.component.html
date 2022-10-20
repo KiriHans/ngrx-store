@@ -14,12 +14,26 @@
       <span>
         <mat-nav-list class="list-horizontal">
           categorias
-          <mat-list-item>ss</mat-list-item><mat-list-item>ss</mat-list-item>
+          <!-- <mat-list-item class="" *ngFor="let category of categoryList$ | async">{{ category.name }}</mat-list-item> -->
         </mat-nav-list>
       </span>
       <span class="spacer"></span>
-      <span class="user-information"> Dummy Rodriguez </span>
-      <a> cart </a>
+      <button [matMenuTriggerFor]="menu" mat-button>
+        <mat-icon>menu</mat-icon>
+        Dummy Rodriguez
+      </button>
+      <mat-menu #menu>
+        <mat-card class="menu-header">
+          <mat-card-header>
+            <img src="assets/applaudo_user-icon.png" />
+            Welcome {{ 'name' }}
+          </mat-card-header>
+        </mat-card>
+        <button mat-menu-item>LogOut</button>
+      </mat-menu>
+      <button mat-icon-button>
+        <mat-icon> shopping_cart </mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>
