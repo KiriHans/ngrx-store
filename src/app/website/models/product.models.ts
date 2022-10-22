@@ -10,9 +10,9 @@ export interface Product {
   likes_up_count: 'string';
   likes_down_count: 'string';
   published_at: 'string';
-  master: Master;
-  category: Category;
-  image: ProductImage;
+  master?: Master;
+  category?: Category;
+  image?: ProductImage;
 }
 
 export interface Master {
@@ -30,6 +30,6 @@ export interface Master {
 }
 
 export interface ProductImage {
-  id: 0;
+  id: number;
   url: 'string';
 }

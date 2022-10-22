@@ -9,7 +9,7 @@ export class CategoriesService {
   constructor(private http: HttpClient) {}
 
   getCategories() {
-    return this.http.get<{ data: Category[] }>(this.CATEGORIES_URL + '/categories').pipe(
+    return this.http.get<{ data: Category[] }>(`${this.CATEGORIES_URL}/categories`).pipe(
       map((value) => {
         return value.data;
       }),

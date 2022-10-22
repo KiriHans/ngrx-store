@@ -3,12 +3,14 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const authreq = this.addTokenHeader(request, this.auth.getAccessToken());
+    const authreq = this.addTokenHeader(request, this.auth.getToken());
     return next.handle(authreq).pipe(
       catchError((error: Response) => {
         this.auth.logout();

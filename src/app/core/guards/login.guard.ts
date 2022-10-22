@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { Observable, tap } from 'rxjs';
+import { AuthState } from 'src/app/auth/reducers';
+import { isLoggedIn, isLoggedOut } from 'src/app/auth/selectors/auth.selectors';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({
@@ -8,18 +11,15 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class LoginGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const url: string = state.url;
-    return this.checkLogin(url);
+    return this.store.pipe(
+      select(isLoggedOut),
+      tap((loggedOut) => {
+        if (!loggedOut) {
+          this.router.navigateByUrl('/');
+        }
+      })
+    );
   }
 
-  checkLogin(url: string): true | UrlTree {
-    if (!this.auth.isLoggedIn) {
-      return true;
-    }
-
-    this.auth.redirectUrl = url;
-    return this.router.parseUrl('/store/home');
-  }
-
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router, private store: Store<AuthState>) {}
 }

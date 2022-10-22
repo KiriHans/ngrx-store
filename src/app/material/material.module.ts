@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const MATERIAL_COMPONENTS = [
   MatMenuModule,
@@ -23,6 +24,7 @@ const MATERIAL_COMPONENTS = [
   MatIconModule,
   MatFormFieldModule,
   MatListModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

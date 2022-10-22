@@ -50,14 +50,6 @@ mat-toolbar-row {
   flex: 1 1 auto;
 }
 
-.list-horizontal {
-  padding: 0;
-  mat-list-item {
-    display: inline-block;
-    width: auto;
-  }
-}
-
 .menu-header {
   @include flex(column, space-between);
 
@@ -90,5 +82,15 @@ mat-toolbar-row {
     gap: 0.3rem;
 
     text-align: center;
+  }
+}
+
+.category-list {
+  overflow-x: auto;
+  width: 70vw;
+  padding: 0;
+  mat-list-item {
+    display: inline-block;
+    width: auto;
   }
 }

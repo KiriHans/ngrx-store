@@ -11,12 +11,10 @@
     </mat-toolbar-row>
 
     <mat-toolbar-row>
-      <span>
-        <mat-nav-list class="list-horizontal">
-          categorias
-          <!-- <mat-list-item class="" *ngFor="let category of categoryList$ | async">{{ category.name }}</mat-list-item> -->
-        </mat-nav-list>
-      </span>
+      <span> categorias </span>
+      <mat-nav-list class="category-list">
+        <mat-list-item *ngFor="let category of categoryList$ | async">{{ category.name }}</mat-list-item>
+      </mat-nav-list>
       <span class="spacer"></span>
       <button [matMenuTriggerFor]="menu" mat-button>
         <mat-icon>menu</mat-icon>
@@ -24,12 +22,15 @@
       </button>
       <mat-menu #menu>
         <mat-card class="menu-header">
-          <mat-card-header>
+          <mat-card-header *ngIf="userProfile$ | async as userProfile">
             <img src="assets/applaudo_user-icon.png" />
-            Welcome {{ 'name' }}
+            Welcome {{ userProfile.name | titlecase }}
           </mat-card-header>
+          <mat-card-header *ngIf="isLoggedOut$ | async"> Welcome! Please sign in to enjoy our products </mat-card-header>
         </mat-card>
-        <button mat-menu-item>LogOut</button>
+
+        <button *ngIf="isLoggedIn$ | async" mat-menu-item (click)="logOut()">LogOut</button>
+        <button *ngIf="isLoggedOut$ | async" mat-menu-item routerLink="/login">Log In</button>
       </mat-menu>
       <button mat-icon-button>
         <mat-icon> shopping_cart </mat-icon>

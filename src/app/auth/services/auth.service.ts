@@ -39,22 +39,14 @@ export class AuthService {
   logout() {
     this.isLoggedIn = false;
     localStorage.clear();
-    this.router.navigateByUrl('/auth/login');
+    this.router.navigateByUrl('/login');
   }
 
   getLocalStorageUserInfo() {
     return localStorage.getItem('user');
   }
 
-  getAccessToken() {
-    return localStorage.getItem('accessToken') || '';
-  }
-
-  getRefreshToken() {
-    return localStorage.getItem('refreshToken') || '';
-  }
-
-  saveTokens(response: Login) {
-    localStorage.setItem('token', response.token);
+  getToken() {
+    return localStorage.getItem('token') || '';
   }
 }

@@ -7,7 +7,6 @@
     <mat-card-content>
       <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
         <mat-card-title> Sign in</mat-card-title>
-        <p>Don't have an account? <a routerLink="../register">Sign up now</a></p>
 
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
@@ -22,7 +21,6 @@
         </mat-form-field>
 
         <button [disabled]="loginForm.invalid || isLogin" mat-raised-button color="accent">Sign in</button>
-        <mat-card-footer> You don't have an account? <a routerLink="../register">Sign up now</a></mat-card-footer>
       </form>
     </mat-card-content>
   </mat-card>

@@ -5,11 +5,11 @@ import { Product } from '../models/product.models';
 
 @Injectable()
 export class ProductsService {
-  private readonly URL = 'https://trainee-program-api-staging.applaudostudios.com/api/v1';
+  private readonly PRODUCT_URL = 'https://trainee-program-api-staging.applaudostudios.com/api/v1';
   constructor(private http: HttpClient) {}
 
   getProducts() {
-    return this.http.get<{ data: Product[] }>(`${URL}/products`).pipe(
+    return this.http.get<{ data: Product[] }>(`${this.PRODUCT_URL}/products?include=image_attachment.blob,category,master`).pipe(
       map((value) => {
         return value.data;
       }),
