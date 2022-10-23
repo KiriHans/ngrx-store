@@ -12,6 +12,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const MATERIAL_COMPONENTS = [
   MatMenuModule,
@@ -25,6 +28,9 @@ const MATERIAL_COMPONENTS = [
   MatFormFieldModule,
   MatListModule,
   MatSnackBarModule,
+  MatAutocompleteModule,
+  MatPaginatorModule,
+  MatGridListModule,
 ];
 
 @NgModule({

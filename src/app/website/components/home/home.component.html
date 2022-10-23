@@ -1,4 +1,13 @@
 <mat-card>
   <h2>products</h2>
-  <website-product-list [productList$]="productList$"></website-product-list>
+  <website-product-list *ngIf="meta$ | async as meta">
+    <ng-container class="card">
+      <website-product-card
+        *ngFor="let product of productList$ | async | paginate: pageSize:pageNumber"
+        [product]="product"
+        [routerLink]="['/product', product.id, product.slug]"
+      ></website-product-card>
+    </ng-container>
+    <mat-paginator [length]="meta.total" [pageSize]="pageSize" [pageSizeOptions]="[6, 10, 20]" (page)="handlePagination($event)"></mat-paginator>
+  </website-product-list>
 </mat-card>

@@ -1,0 +1,59 @@
+@import "functions";
+@import "variables";
+@import "mixins";
+
+.grid-product {
+  width: 70vw;
+  min-width: 400px;
+
+  margin: 5rem auto;
+  padding: 0.8rem 1rem;
+  box-shadow: 2px 2px 4px 3px rgba($color: #414141, $alpha: 0.35);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+}
+
+.image-product {
+  grid-area: 1 / 1 / 3 / 3;
+}
+
+.header-card {
+  background-color: colors("primary");
+  margin: -18px -18px 0.8rem;
+  padding: 0.8rem 0.3rem 0;
+  color: white;
+
+  mat-card-subtitle {
+    color: colors("light");
+  }
+}
+
+.product {
+  @include flex(column, space-around);
+  margin-right: 1rem;
+  border: 1px solid colors("light");
+  box-shadow: 1px 3px 4px 3px rgba($color: #414141, $alpha: 0.35);
+
+  grid-area: 1 / 3 / 4 / 4;
+}
+
+.metadata {
+  @include flex(column, space-around);
+  margin: 1rem 0;
+}
+
+.str mat-card-actions {
+  @include flex(row, center);
+  align-items: center;
+  gap: 1rem;
+}
+
+.description-product {
+  box-shadow: 2px 2px 4px 3px rgba($color: #414141, $alpha: 0.35);
+
+  grid-area: 3 / 1 / 4 / 3;
+}

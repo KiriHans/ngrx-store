@@ -1,1 +1,33 @@
-<p>product-details works!</p>
+<div *ngIf="product$ | async as product" class="grid-product">
+  <img class="image-product" [src]="product.image?.url" />
+
+  <mat-card class="product">
+    <mat-card-header class="header-card">
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.category?.name }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <h2>
+        {{ product.master?.price | currency }}
+      </h2>
+      <mat-card-title>Description:</mat-card-title>
+      <p>{{ product.description }}</p>
+      <mat-card-subtitle class="metadata">
+        <div class="stock">Stock: {{ product.master?.stock }}</div>
+        <div>published at: {{ product.published_at | date }}</div>
+      </mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button>
+        <mat-icon>thumb_up</mat-icon>
+        {{ product.likes_up_count }}
+      </button>
+      <button mat-icon-button>
+        <mat-icon>thumb_down</mat-icon>
+        {{ product.likes_down_count }}
+      </button>
+    </mat-card-actions>
+    <button mat-raised-button color="accent">Add to cart</button>
+  </mat-card>
+</div>

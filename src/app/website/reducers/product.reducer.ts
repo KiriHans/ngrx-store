@@ -17,4 +17,4 @@ export const productReducer = createReducer(
   })
 );
 
-export const { selectAll } = productAdapter.getSelectors();
+export const { selectIds, selectEntities, selectAll, selectTotal } = productAdapter.getSelectors();

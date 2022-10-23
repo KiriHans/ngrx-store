@@ -17,6 +17,7 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { CustomErrorHandler } from './core/services/custom-error-handler.service';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { reducers } from './reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
     }),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
   ],

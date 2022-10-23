@@ -18,8 +18,6 @@ export class WebsiteComponent implements OnInit {
           break;
         }
 
-        case event instanceof NavigationEnd:
-        case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           this.loading = false;
           break;

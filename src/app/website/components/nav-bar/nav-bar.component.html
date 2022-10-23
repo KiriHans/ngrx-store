@@ -2,18 +2,25 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span class="name-store"> Store</span>
+
       <div class="background-search-bar">
-        <input matInput type="text" placeholder="Search for products..." />
+        <input [formControl]="mySearchBar" matInput type="text" placeholder="Search for products..." [matAutocomplete]="searchAuto" />
         <button class="search-button" mat-icon-button>
           <mat-icon matSuffix class="search">search</mat-icon>
         </button>
+        <mat-autocomplete #searchAuto="matAutocomplete">
+          <mat-option *ngFor="let product of productListSearched$ | async" [value]="product.name">
+            {{ product.name }}
+          </mat-option>
+        </mat-autocomplete>
       </div>
     </mat-toolbar-row>
 
     <mat-toolbar-row>
       <span> categorias </span>
       <mat-nav-list class="category-list">
-        <mat-list-item *ngFor="let category of categoryList$ | async">{{ category.name }}</mat-list-item>
+        <mat-list-item routerLink="/"> Home </mat-list-item>
+        <mat-list-item *ngFor="let category of categoryList$ | async" (click)="filterByCategory(category.name)">{{ category.name }}</mat-list-item>
       </mat-nav-list>
       <span class="spacer"></span>
       <button [matMenuTriggerFor]="menu" mat-button>
@@ -32,7 +39,7 @@
         <button *ngIf="isLoggedIn$ | async" mat-menu-item (click)="logOut()">LogOut</button>
         <button *ngIf="isLoggedOut$ | async" mat-menu-item routerLink="/login">Log In</button>
       </mat-menu>
-      <button mat-icon-button>
+      <button mat-icon-button routerLink="/cart">
         <mat-icon> shopping_cart </mat-icon>
       </button>
     </mat-toolbar-row>

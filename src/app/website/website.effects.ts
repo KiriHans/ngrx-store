@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, map } from 'rxjs';
 import { WebsiteActions } from './action-types';
+import { CartDTO } from './models/cart.models';
+import { CartService } from './services/cart.service';
 import { CategoriesService } from './services/categories.service';
+import { MetadataProductsService } from './services/metadata-products.service';
 import { ProductsService } from './services/products.service';
-import { allCategoriesLoaded, allProductsLoaded } from './website.actions';
+import { allCategoriesLoaded, allMetadataProductsLoaded, allProductsLoaded, cartLoaded, itemLoaded } from './website.actions';
 
 @Injectable()
 export class WebsiteEffects {
@@ -32,5 +35,50 @@ export class WebsiteEffects {
     );
   });
 
-  constructor(private actions$: Actions, private categories: CategoriesService, private products: ProductsService) {}
+  loadMetadataProducts$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(WebsiteActions.loadMetadataProducts),
+      concatMap(() => {
+        return this.metadataProducts.getMetadata();
+      }),
+      map((metadata) => {
+        return allMetadataProductsLoaded({ productMeta: metadata });
+      })
+    );
+  });
+
+  loadCart$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(WebsiteActions.loadCart),
+      concatMap(() => {
+        return this.cart.getCart();
+      }),
+      map((cart) => {
+        return cartLoaded({ cart });
+      })
+    );
+  });
+
+  AddItemCart$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(WebsiteActions.addProductCart),
+        concatMap((item) => {
+          return this.cart.addItemCart(item.cartDto);
+        }),
+        map((cart) => {
+          return itemLoaded({ cart });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  constructor(
+    private actions$: Actions,
+    private categories: CategoriesService,
+    private products: ProductsService,
+    private metadataProducts: MetadataProductsService,
+    private cart: CartService
+  ) {}
 }

@@ -9,7 +9,6 @@ import { Product } from '../../models/product.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent implements OnInit {
-  @Input() productList$!: Observable<Product[]>;
   constructor() {}
 
   ngOnInit(): void {}

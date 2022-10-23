@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { WebsiteComponent } from './components/website.component';
+import { CartResolver } from './resolvers/cart.resolver';
 import { CategoriesResolver } from './resolvers/categories.resolver';
+import { MetadataProductsResolver } from './resolvers/metadata-products.resolver';
 import { ProductsResolver } from './resolvers/products.resolver';
 
 const routes: Routes = [
@@ -13,8 +16,16 @@ const routes: Routes = [
     resolve: {
       categories: CategoriesResolver,
       products: ProductsResolver,
+      metaProducts: MetadataProductsResolver,
     },
     children: [
+      {
+        path: 'cart',
+        component: CartComponent,
+        resolve: {
+          cart: CartResolver,
+        },
+      },
       {
         path: 'product/:id/:productName',
         component: ProductDetailsComponent,

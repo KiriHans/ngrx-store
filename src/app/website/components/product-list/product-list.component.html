@@ -1,3 +1,6 @@
 <mat-card>
-  <website-product-card *ngFor="let product of productList$ | async" [product]="product"></website-product-card>
+  <div class="list-cards-container">
+    <ng-content select=".card"></ng-content>
+  </div>
+  <ng-content></ng-content>
 </mat-card>

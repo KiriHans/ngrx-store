@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationError, NavigationStart, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { login } from './auth/auth.actions';
 import { AuthState } from './auth/reducers';
@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
           this.loading = true;
           break;
         }
-
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           this.loading = false;
           break;

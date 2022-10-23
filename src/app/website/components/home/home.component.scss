@@ -1,0 +1,12 @@
+@import "functions";
+@import "variables";
+@import "mixins";
+
+mat-paginator {
+  @include flex(none, flex-end);
+  position: relative;
+  width: 80vw;
+  box-shadow: 4px 4px 1rem 3px rgba($color: #414141, $alpha: 0.35);
+
+  margin: 1rem auto 0;
+}

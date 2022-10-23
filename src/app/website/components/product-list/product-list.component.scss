@@ -1,0 +1,31 @@
+@import "functions";
+@import "variables";
+@import "mixins";
+
+mat-card {
+  overflow: hidden;
+}
+
+.list-cards-container {
+  --width: 80vw;
+  @include flex(row, space-around);
+  flex-wrap: wrap;
+  row-gap: 1rem;
+
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+
+  width: var(--width);
+  min-width: 30rem;
+  box-shadow: 1rem 1rem 2rem 3px rgba($color: #414141, $alpha: 0.35);
+  overflow: hidden;
+
+  .product-card {
+    width: 20rem;
+  }
+}
+
+mat-card-content {
+  width: 40rem;
+  overflow: hidden;
+}

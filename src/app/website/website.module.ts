@@ -19,24 +19,25 @@ import { ProductsResolver } from './resolvers/products.resolver';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { WebsiteComponent } from './components/website.component';
-import { ToastrModule } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
+import { metaProductsReducer } from './reducers/metadata-products.reducer';
+import { MetadataProductsResolver } from './resolvers/metadata-products.resolver';
+import { PaginatePipe } from './pipes/paginate.pipe';
+import { MetadataProductsService } from './services/metadata-products.service';
+import { ProductByCategoryService } from './services/product-by-category.service';
+import { CartComponent } from './components/cart/cart.component';
+import { CartResolver } from './resolvers/cart.resolver';
+import { CartService } from './services/cart.service';
+import { cartReducer } from './reducers/cart.reducer';
 
-const COMPONENTS = [NavBarComponent, HomeComponent, ProductDetailsComponent, ProductCardComponent, ProductListComponent];
-const SERVICES = [CategoriesService, ProductsService];
-const RESOLVERS = [CategoriesResolver, ProductsResolver];
+const COMPONENTS = [NavBarComponent, HomeComponent, ProductDetailsComponent, ProductCardComponent, ProductListComponent, CartComponent];
+const SERVICES = [CategoriesService, ProductsService, MetadataProductsService, ProductByCategoryService, CartService];
+const RESOLVERS = [CategoriesResolver, ProductsResolver, MetadataProductsResolver, CartResolver];
+const PIPES = [PaginatePipe];
 
 @NgModule({
   providers: [...SERVICES, ...RESOLVERS],
-  declarations: [WebsiteComponent, ...COMPONENTS],
-  imports: [
-    CommonModule,
-    WebsiteRoutingModule,
-    MaterialModule,
-
-    SharedModule,
-    StoreModule.forFeature('category', categoryReducer),
-    StoreModule.forFeature('product', productReducer),
-    EffectsModule.forFeature([WebsiteEffects]),
-  ],
+  declarations: [WebsiteComponent, ...COMPONENTS, ...PIPES],
+  imports: [CommonModule, WebsiteRoutingModule, MaterialModule, ReactiveFormsModule, SharedModule, EffectsModule.forFeature([WebsiteEffects])],
 })
 export class WebsiteModule {}

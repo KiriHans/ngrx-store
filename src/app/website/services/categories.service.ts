@@ -17,7 +17,6 @@ export class CategoriesService {
         if (error.status == 401) {
           throw new Error('There are not categories');
         } else {
-          console.log('error');
           throw new Error('Somenthing happened');
         }
       })

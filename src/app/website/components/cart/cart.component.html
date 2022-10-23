@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-tab-group>
+    <mat-tab class="cart" label="Cart">
+      <div class="product" *ngFor="let item of cart$ | async">
+        <div class="description-product">
+          <h2>{{ item.name }}</h2>
+          <div class="CRUD-operations">
+            <button mat-button mat-raised-button color="accent">Delete item</button>
+          </div>
+        </div>
+        <div class="add-more-products">
+          <div></div>
+          <div>{{ item.total }}</div>
+        </div>
+        <div class="price-product">{{ item.price | currency }}</div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

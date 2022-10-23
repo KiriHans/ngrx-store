@@ -22,8 +22,8 @@ export class ProductsResolver implements Resolve<Boolean> {
           }
         },
       }),
-      filter((coursesLoaded) => {
-        return coursesLoaded;
+      filter((productsLoaded) => {
+        return productsLoaded;
       }),
       first(),
       finalize(() => {

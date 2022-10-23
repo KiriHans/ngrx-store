@@ -1,10 +1,10 @@
-<mat-card *ngIf="product !== null">
+<mat-card class="product-card" *ngIf="product !== null">
   <img [src]="product.image?.url" [alt]="product.id" mat-card-md-image />
   <mat-card-header>
     <mat-card-title>{{ product.name }}</mat-card-title>
     <mat-card-subtitle>{{ product.category?.name }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content> </mat-card-content>
+  <mat-card-content> {{ product.description }} </mat-card-content>
   <mat-card-actions>
     <button mat-icon-button><mat-icon>favorite</mat-icon></button>
   </mat-card-actions>
