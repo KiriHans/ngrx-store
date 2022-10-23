@@ -4,12 +4,12 @@
       <span class="name-store"> Store</span>
 
       <div class="background-search-bar">
-        <input [formControl]="mySearchBar" matInput type="text" placeholder="Search for products..." [matAutocomplete]="searchAuto" />
-        <button class="search-button" mat-icon-button>
+        <input #searchBar [formControl]="mySearchBar" matInput type="text" placeholder="Search for products..." [matAutocomplete]="searchAuto" />
+        <button *ngIf="productListSearched$ | async as productList" class="search-button" mat-icon-button (click)="searchProduct(searchBar.value, productList)">
           <mat-icon matSuffix class="search">search</mat-icon>
         </button>
         <mat-autocomplete #searchAuto="matAutocomplete">
-          <mat-option *ngFor="let product of productListSearched$ | async" [value]="product.name">
+          <mat-option *ngFor="let product of productListSearched$ | async" [routerLink]="['/product', product.id, product.slug]" [value]="product.name">
             {{ product.name }}
           </mat-option>
         </mat-autocomplete>

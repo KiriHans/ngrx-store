@@ -3,11 +3,11 @@
 @import "mixins";
 
 .product {
-  @include flex(row, space-around);
+  @include flex(row, space-between);
   width: 70vw;
   min-width: 400px;
 
   margin: 5rem auto;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 2rem;
   box-shadow: 2px 2px 4px 3px rgba($color: #414141, $alpha: 0.35);
 }

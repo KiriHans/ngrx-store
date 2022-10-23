@@ -6,10 +6,11 @@ import { debounceTime, distinctUntilChanged, Observable, of, switchMap, tap } fr
 import { logOut } from 'src/app/auth/auth.actions';
 import { User } from 'src/app/auth/models/user.models';
 import { isLoggedIn, isLoggedOut, selectUserProfile } from 'src/app/auth/selectors/auth.selectors';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { Category } from '../../models/category.models';
 import { Product } from '../../models/product.models';
 import { selectAllCategories } from '../../selectors/categories.selectors';
-import { selectAllProducts, selectProductsByCategory, selectSearchedProducts } from '../../selectors/products.selectors';
+import { selectSearchedProducts } from '../../selectors/products.selectors';
 import { ProductByCategoryService } from '../../services/product-by-category.service';
 
 @Component({
@@ -20,7 +21,7 @@ import { ProductByCategoryService } from '../../services/product-by-category.ser
 })
 export class NavBarComponent implements OnInit {
   categoryList$!: Observable<Category[]>;
-  productListSearched$ = this.searchAutoComplete('weath');
+  productListSearched$ = this.searchAutoComplete('');
 
   mySearchBar!: FormControl;
   productsByCategory$!: Observable<Product[]>;
@@ -29,7 +30,7 @@ export class NavBarComponent implements OnInit {
   isLoggedIn$!: Observable<boolean>;
   isLoggedOut$!: Observable<boolean>;
 
-  constructor(private router: Router, private store: Store<Category[]>, private productByCategoryService: ProductByCategoryService) {
+  constructor(private router: Router, private store: Store<Category[]>, private productByCategoryService: ProductByCategoryService, private notifications: NotificationService) {
     this.mySearchBar = new FormControl('');
   }
 
@@ -67,5 +68,14 @@ export class NavBarComponent implements OnInit {
 
   filterByCategory(category: string) {
     this.productByCategoryService.getProductsByCategory(category);
+  }
+
+  searchProduct(productName: string, productList: Product[]) {
+    console.log(productList);
+    if (productList.length !== 1) {
+      this.notifications.showWarning('Sorry, but there is not an object with that name', 'No product found');
+    } else {
+      this.router.navigateByUrl(`/product/${productList[0].id}/${productList[0].slug}`);
+    }
   }
 }

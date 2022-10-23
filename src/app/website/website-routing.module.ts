@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../core/guards/auth.guard';
 import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -20,8 +21,17 @@ const routes: Routes = [
     },
     children: [
       {
+        path: 'cart/:idProduct/:quantity',
+        component: CartComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          cart: CartResolver,
+        },
+      },
+      {
         path: 'cart',
         component: CartComponent,
+        canActivate: [AuthGuard],
         resolve: {
           cart: CartResolver,
         },

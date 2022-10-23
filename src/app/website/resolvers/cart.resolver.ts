@@ -16,7 +16,6 @@ export class CartResolver implements Resolve<boolean | CartState> {
     return this.store.pipe(
       select(isCartLoaded),
       tap((cartLoaded) => {
-        console.log(cartLoaded);
         if (!this.loading && !cartLoaded) {
           this.loading = true;
           this.store.dispatch(loadCart());

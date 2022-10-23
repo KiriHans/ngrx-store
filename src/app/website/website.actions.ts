@@ -18,4 +18,5 @@ export const loadCart = createAction('[Cart Resolver] Load Cart');
 export const cartLoaded = createAction('[Load Cart Effect] Cart Loaded', props<{ cart: Cart }>());
 
 export const addProductCart = createAction('[Cart Button] Add Product Cart', props<{ cartDto: CartDTO }>());
-export const itemLoaded = createAction('[Load Item Effect] Item Added', props<{ cart: Cart }>());
+export const itemLoaded = createAction('[Load Item Effect] Item Added', props<{ cart: ItemsCart }>());
+export const updateItem = createAction('[Item/API] Update Item', props<{ item: Update<ItemsCart> }>());

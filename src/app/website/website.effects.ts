@@ -65,9 +65,6 @@ export class WebsiteEffects {
         ofType(WebsiteActions.addProductCart),
         concatMap((item) => {
           return this.cart.addItemCart(item.cartDto);
-        }),
-        map((cart) => {
-          return itemLoaded({ cart });
         })
       );
     },

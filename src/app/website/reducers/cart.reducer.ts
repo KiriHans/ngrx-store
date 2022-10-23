@@ -26,10 +26,11 @@ export const cartReducer = createReducer(
     return CartAdapter.setAll(action.cart.items, { ...state, ...action.cart, cartLoaded: true });
   }),
   on(WebsiteActions.itemLoaded, (state, action) => {
-    return CartAdapter.setAll(action.cart.items, { ...state, ...action.cart, cartLoaded: true });
+    return CartAdapter.addOne(action.cart, state);
+  }),
+  on(WebsiteActions.updateItem, (state, action) => {
+    return CartAdapter.updateOne(action.item, state);
   })
 );
 
 export const { selectIds, selectEntities, selectAll, selectTotal } = CartAdapter.getSelectors();
-
-export const selectItemsIds = selectIds;

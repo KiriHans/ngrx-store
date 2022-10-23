@@ -9,7 +9,13 @@
           </div>
         </div>
         <div class="add-more-products">
-          <div></div>
+          <div class="quantity">
+            <mat-form-field>
+              <mat-label>Quantity</mat-label>
+              <input #quantity [formControl]="quantityInput" matInput type="number" />
+              <mat-hint>max {{ quantityLimit }}</mat-hint>
+            </mat-form-field>
+          </div>
           <div>{{ item.total }}</div>
         </div>
         <div class="price-product">{{ item.price | currency }}</div>

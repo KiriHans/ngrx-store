@@ -20,7 +20,6 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { SharedModule } from '../shared/shared.module';
 import { WebsiteComponent } from './components/website.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { metaProductsReducer } from './reducers/metadata-products.reducer';
 import { MetadataProductsResolver } from './resolvers/metadata-products.resolver';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { MetadataProductsService } from './services/metadata-products.service';
@@ -28,7 +27,6 @@ import { ProductByCategoryService } from './services/product-by-category.service
 import { CartComponent } from './components/cart/cart.component';
 import { CartResolver } from './resolvers/cart.resolver';
 import { CartService } from './services/cart.service';
-import { cartReducer } from './reducers/cart.reducer';
 
 const COMPONENTS = [NavBarComponent, HomeComponent, ProductDetailsComponent, ProductCardComponent, ProductListComponent, CartComponent];
 const SERVICES = [CategoriesService, ProductsService, MetadataProductsService, ProductByCategoryService, CartService];

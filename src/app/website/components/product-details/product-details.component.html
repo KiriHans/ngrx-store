@@ -27,7 +27,15 @@
         <mat-icon>thumb_down</mat-icon>
         {{ product.likes_down_count }}
       </button>
+      <div class="quantity">
+        <mat-form-field>
+          <mat-label>Quantity</mat-label>
+          <input [formControl]="quantityInput" matInput type="number" />
+          <mat-hint>max {{ quantityLimit }}</mat-hint>
+        </mat-form-field>
+      </div>
     </mat-card-actions>
-    <button mat-raised-button color="accent">Add to cart</button>
+
+    <button [disabled]="quantity.invalid" mat-raised-button color="accent" [routerLink]="['/cart', product.id, quantity.value]">Add to cart</button>
   </mat-card>
 </div>
