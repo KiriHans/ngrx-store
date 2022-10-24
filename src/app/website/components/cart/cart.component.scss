@@ -4,10 +4,25 @@
 
 .product {
   @include flex(row, space-between);
+  gap: 3rem;
   width: 70vw;
   min-width: 400px;
 
   margin: 5rem auto;
   padding: 0.8rem 2rem;
   box-shadow: 2px 2px 4px 3px rgba($color: #414141, $alpha: 0.35);
+
+  @include mobile {
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 70vw;
+    min-width: 250px;
+    padding: 0.8rem 1rem;
+  }
+}
+
+.total {
+  font-size: sizes("semibold");
+  font-weight: 700;
+  color: colors("accent");
 }

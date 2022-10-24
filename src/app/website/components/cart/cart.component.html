@@ -12,13 +12,16 @@
           <div class="quantity">
             <mat-form-field>
               <mat-label>Quantity</mat-label>
-              <input #quantity [formControl]="quantityInput" matInput type="number" />
-              <mat-hint>max {{ quantityLimit }}</mat-hint>
+              <input #quantity matInput type="number" pattern="[0-9]+" min="1" [max]="item.quantity" [value]="item.quantity" />
             </mat-form-field>
           </div>
-          <div>{{ item.total }}</div>
+          <div class="total">Total: {{ +item.price * +quantity.value | currency }}</div>
         </div>
-        <div class="price-product">{{ item.price | currency }}</div>
+
+        <div class="price-product">
+          <div>Price Per Unit:</div>
+          {{ item.price | currency }}
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>

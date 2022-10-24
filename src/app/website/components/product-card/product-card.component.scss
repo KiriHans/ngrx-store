@@ -5,4 +5,14 @@
 .product-card {
   width: 20rem;
   box-shadow: 2px 2px 4px 3px rgba($color: #414141, $alpha: 0.35);
+
+  @include mobile {
+    width: 70vw;
+  }
+}
+
+.actions {
+  @include flex(row, center);
+  align-items: center;
+  gap: 1rem;
 }

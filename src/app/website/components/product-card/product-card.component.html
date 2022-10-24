@@ -5,7 +5,14 @@
     <mat-card-subtitle>{{ product.category?.name }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content> {{ product.description }} </mat-card-content>
-  <mat-card-actions>
-    <button mat-icon-button><mat-icon>favorite</mat-icon></button>
+  <mat-card-actions class="actions">
+    <button mat-icon-button>
+      <mat-icon>thumb_up</mat-icon>
+      {{ product.likes_up_count }}
+    </button>
+    <button mat-icon-button (click)="like()" [disabled]="disableLikeButton">
+      <mat-icon>thumb_down</mat-icon>
+      {{ product.likes_down_count }}
+    </button>
   </mat-card-actions>
 </mat-card>

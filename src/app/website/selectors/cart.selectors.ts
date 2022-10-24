@@ -18,3 +18,12 @@ export const selectCurrentCartId = createSelector(selectCartState, getSelectedCa
 export const isCartLoaded = createSelector(selectCartState, (state) => {
   return state.cartLoaded;
 });
+
+export function selectItemById(id: string | number) {
+  return createSelector(selectCart, (cart) => {
+    const selectedById = cart.filter((item) => {
+      return +item.product_id === +id;
+    });
+    return selectedById[0];
+  });
+}

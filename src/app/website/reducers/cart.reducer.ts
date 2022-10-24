@@ -6,19 +6,31 @@ import { Cart, ItemsCart } from '../models/cart.models';
 export const cartFeatureKey = 'cart';
 
 export interface CartState extends EntityState<ItemsCart> {
-  id: 'string';
-  user_id: 'string';
-  number: 'string';
-  status: 'string';
-  total: 'string';
-  total_items: 'string';
-  completed_at: 'string';
-  created_at: 'string';
+  id: string | null;
+  user_id: string | null;
+  number: string | null;
+  status: string | null;
+  total: string | null;
+  total_items: string | null;
+  completed_at: string | null;
+  created_at: string | null;
   cartLoaded: boolean;
 }
 
-export const CartAdapter = createEntityAdapter<ItemsCart>();
-export const initialCartState = CartAdapter.getInitialState();
+export const CartAdapter = createEntityAdapter<ItemsCart>({
+  selectId: (item) => item.product_id,
+});
+export const initialCartState: CartState = CartAdapter.getInitialState({
+  id: null,
+  user_id: null,
+  number: null,
+  status: null,
+  total: null,
+  total_items: null,
+  completed_at: null,
+  created_at: null,
+  cartLoaded: false,
+});
 
 export const cartReducer = createReducer(
   initialCartState,
@@ -26,10 +38,10 @@ export const cartReducer = createReducer(
     return CartAdapter.setAll(action.cart.items, { ...state, ...action.cart, cartLoaded: true });
   }),
   on(WebsiteActions.itemLoaded, (state, action) => {
-    return CartAdapter.addOne(action.cart, state);
+    return CartAdapter.addOne(action.item, state);
   }),
-  on(WebsiteActions.updateItem, (state, action) => {
-    return CartAdapter.updateOne(action.item, state);
+  on(WebsiteActions.upsertItem, (state, action) => {
+    return CartAdapter.upsertOne(action.item, state);
   })
 );
 

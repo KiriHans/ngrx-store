@@ -13,7 +13,6 @@ export class CustomErrorHandler implements ErrorHandler {
       });
     } else {
       console.error(error);
-
       this.snackbar.open('Error was detected! We are working on it!', 'close', {
         duration: 2000,
       });

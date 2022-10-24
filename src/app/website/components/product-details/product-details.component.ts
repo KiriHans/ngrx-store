@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Update } from '@ngrx/entity';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription, tap } from 'rxjs';
 import { ItemsCart } from '../../models/cart.models';
 import { Product } from '../../models/product.models';
 import { selectProductById } from '../../selectors/products.selectors';
+import { Addlike } from '../../website.actions';
 
 @Component({
   templateUrl: './product-details.component.html',
@@ -16,10 +18,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   id!: string | null;
   unsusbscribe!: Subscription;
 
+  productElement!: Product;
   quantityInput!: FormControl;
   quantityLimit!: string | undefined;
 
-  constructor(private route: ActivatedRoute, private cartRouter: Router, private productStore: Store<Product[]>, private itemStore: Store<ItemsCart[]>) {
+  disableLikeButton = false;
+
+  constructor(private route: ActivatedRoute, private productStore: Store<Product[]>) {
     this.quantityInput = new FormControl(0, [Validators.pattern(/^[0-9]+$/)]);
   }
 
@@ -33,6 +38,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       this.product$ = this.productStore.pipe(
         select(selectProductById(this.id)),
         tap((product) => {
+          this.productElement = product;
           this.quantityLimit = product.master?.stock;
           if (this.quantityLimit) {
             this.quantityInput.addValidators(Validators.max(+this.quantityLimit));
@@ -46,6 +52,23 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   public get quantity(): FormControl {
     return this.quantityInput;
+  }
+
+  like() {
+    if (this.productElement) {
+      const product: Product = {
+        ...this.productElement,
+        likes_up_count: `${+this.productElement.likes_up_count + 1}`,
+      };
+
+      const update: Update<Product> = {
+        id: product.id,
+        changes: product,
+      };
+
+      this.productStore.dispatch(Addlike({ update }));
+      this.disableLikeButton = true;
+    }
   }
 
   ngOnDestroy(): void {

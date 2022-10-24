@@ -5,11 +5,17 @@
 .name-store {
   padding-right: 8rem;
   font-size: sizes("bold");
+  @include mobile {
+    padding-right: 10vw;
+  }
 }
 
 mat-toolbar-row {
   @include flex(row, flex-start);
   padding: 0.2rem 5rem;
+  @include mobile {
+    padding: 0.2rem 10vw;
+  }
 
   &:nth-child(1) {
     box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
@@ -17,10 +23,14 @@ mat-toolbar-row {
 
   &:nth-child(2) {
     padding: 2.5rem 5.2rem;
+    @include mobile {
+      padding: 0.2rem 10vw;
+    }
   }
 }
 
 .background-search-bar {
+  @include flex(row, space-between);
   background-color: white;
   width: 50%;
   border: 2px solid rgb(55, 55, 55);
@@ -29,17 +39,10 @@ mat-toolbar-row {
   input {
     padding: 0.5rem;
     font-size: large;
-    width: 90%;
     background: transparent;
     border: none;
     outline: 0;
     color: black;
-
-    &::after {
-      content: " ";
-      position: absolute;
-      right: 0;
-    }
   }
 }
 
@@ -93,5 +96,9 @@ mat-toolbar-row {
   mat-list-item {
     display: inline-block;
     width: auto;
+  }
+
+  @include mobile {
+    display: none;
   }
 }
